@@ -1,0 +1,46 @@
+﻿@model IndexViewModel
+
+@{
+    ViewBag.Title = "Blog Website";
+    ViewBag.Description = "This Blog has everything!";
+    ViewBag.Keywords = "blog programming travel photography";
+    //ViewData.Add("Title", "Blog Website");
+    //ViewData.Add("Description", "This Blog has everything!");
+    //ViewData.Add("Keywords", "blog programming travel photography");
+    var base_path = Context.Request.PathBase;
+}
+@*<h2>Home Page!</h2>
+
+<img src="~/content/static/fine.png" width="500"/>*@
+<div class="main-img">
+    <span class="title">Amazing Blog Site</span>
+</div>
+
+<div class="container">
+    @*<ul>
+            @foreach (var post in Model)
+           {
+               <li>
+                   <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
+                       @post.Title
+                   </a>
+               </li>
+           }
+        </ul>*@
+
+    <partial name="_BlogPagination" model="Model"></partial>
+
+    @foreach (var post in Model.Posts)
+    {
+        var image_path = $"{base_path}/Image/{post.Image}";
+        <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id" class="post">
+            <img src="@image_path" width="500" />
+            <span class="title">
+                @post.Title
+            </span>
+        </a>
+    }
+
+    <partial name="_BlogPagination" model="Model"></partial>
+
+</div>

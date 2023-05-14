@@ -1,0 +1,111 @@
+﻿body {
+    margin: 0px 0px 2px 0px;
+    background-color: #80dee2;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+nav {
+    background-color: #142127;
+    height: 50px;
+    width: 100%;
+    text-align: center;
+}
+
+    nav a {
+        display: inline-block;
+        padding: 15px;
+    }
+
+.main-img {
+    position: relative;
+    height: 500px;
+    background-image: url("../content/static/fine.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.title {
+    position: absolute;
+    color: white;
+    font-size: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 35%;
+    text-shadow: 0 0 8px black;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+}
+
+.post {
+    margin: 5px;
+    position: relative;
+    display: flex;
+    height: 400px;
+    box-shadow: 0 0 5px 0 black;
+}
+
+    .post img {
+        width: 100%;
+        object-fit: cover;
+    }
+
+.post-body {
+    margin: -5px 5px 0;
+    background-color: white;
+    padding: 20px 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.no-shadow {
+    box-shadow: none;
+}
+
+.pages{
+    display:flex;
+    justify-content: center;
+    margin: 2rem;
+}
+.pages a{
+    background-color: #aaa;
+    padding: 0.5rem 0.75rem;
+    color: white;
+    border: 1px solid #eee;
+    margin: 0 0.25rem;
+}
+    .pages a:hover {
+        background-color: #999;
+        text-decoration: none;
+    }
+    .pages a.active{
+        background-color: #ccc;
+
+    }
+.three-dots{
+    line-height: 1;
+    font-size: 24px;
+}
+.sign-in-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+.sign-in-form div{
+    max-width: 200px;
+    width: 100%;
+    margin-bottom: 1rem;
+}

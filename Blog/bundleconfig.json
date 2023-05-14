@@ -1,0 +1,16 @@
+[
+  {
+    "inputFiles": [ "wwwroot/css/site.css" ],
+    "outputFileName": "wwwroot/css/site.min.css"
+
+  },
+  {
+      "inputFiles": [ "wwwroot/js/site.js" ],
+      "outputFileName": "wwwroot/js/site.min.js",
+      "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  }
+]
+// https://docs.microsoft.com/en-us/aspnet/core/client-side/bundling-and-minification?view=aspnetcore-6.0
