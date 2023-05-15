@@ -14,6 +14,8 @@ using Blog.Data.Repository;
 using Microsoft.AspNetCore.Identity;
 using Blog.Data.FileManager;
 using Microsoft.AspNetCore.Mvc;
+using Pomelo.EntityFrameworkCore.MySql.Storage;
+using Pomelo.EntityFrameworkCore.MySql.Internal;
 
 namespace Blog
 {
@@ -48,7 +50,16 @@ namespace Blog
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
             });
 
-            services.AddDbContext<AppDbContext>(opts => opts.UseSqlServer(Configuration["DefaultConnection"]));
+            var connectionString = Configuration["DefaultConnection"];
+            var serverVersion = Configuration["MySQLServerVersion"];
+
+            services.AddDbContext<AppDbContext>(opts => opts.UseMySql(connectionString, mysqlOptions =>
+            {
+                mysqlOptions.ServerVersion(serverVersion);
+                mysqlOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(30), null);
+                mysqlOptions.MinBatchSize(1);
+                mysqlOptions.MaxBatchSize(42);
+            }));
             services.AddTransient<IRepository, Repository>();
             services.AddTransient<IFileManager, FileManager>();
             // dotnet ef migrations add MigrationName
