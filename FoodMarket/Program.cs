@@ -46,6 +46,16 @@ namespace FoodMarket
                     // add role to user
                     userMgr.AddToRoleAsync(adminUser, adminRole.Name).GetAwaiter().GetResult();
                 }
+                if(ctx.Roles.FirstOrDefault(role => role.Name.Equals("Seller")) == null)
+                {
+                    var sellerRole = new IdentityRole("Seller");
+                    roleMgr.CreateAsync(sellerRole).GetAwaiter().GetResult();
+                }
+                if (ctx.Roles.FirstOrDefault(role => role.Name.Equals("Buyer")) == null)
+                {
+                    var sellerRole = new IdentityRole("Buyer");
+                    roleMgr.CreateAsync(sellerRole).GetAwaiter().GetResult();
+                }
             }
             catch (Exception e)
             {
