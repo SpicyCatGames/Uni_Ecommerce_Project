@@ -13,7 +13,7 @@ namespace FoodMarket.Models
         public string Description { get; set; } = "";
         public string Category { get; set; } = "";
         public int Price { get; set;} = 0;
-
+        public int Stock { get; set;} = 0;
         public DateTime Created { get; set; } = DateTime.Now;
 
         public List<MainComment> MainComments { get; set; }
