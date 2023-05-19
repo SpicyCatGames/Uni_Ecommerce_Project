@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Blog.Models.Comments
+namespace FoodMarket.Models.Comments
 {
     public class Comment
     {

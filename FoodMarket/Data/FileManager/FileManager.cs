@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PhotoSauce.MagicScaler;
 
-namespace Blog.Data.FileManager
+namespace FoodMarket.Data.FileManager
 {
     public class FileManager : IFileManager
     {

@@ -1,7 +1,7 @@
-﻿using Blog.Helpers;
-using Blog.Models;
-using Blog.Models.Comments;
-using Blog.ViewModels;
+﻿using FoodMarket.Helpers;
+using FoodMarket.Models;
+using FoodMarket.Models.Comments;
+using FoodMarket.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blog.Data.Repository
+namespace FoodMarket.Data.Repository
 {
     public class Repository : IRepository
     {
@@ -21,14 +21,14 @@ namespace Blog.Data.Repository
             _ctx = ctx;
         }
 
-        public void AddPost(Post post)
+        public void AddItem(Item post)
         {
-            _ctx.Posts.Add(post);
+            _ctx.Items.Add(post);
         }
 
-        public async Task<List<Post>> GetAllPosts()
+        public async Task<List<Item>> GetAllIItems()
         {
-            return await _ctx.Posts.ToListAsync();
+            return await _ctx.Items.ToListAsync();
         }
 
         //public async Task<IndexViewModel> GetAllPosts(int pageNumber)
@@ -47,27 +47,27 @@ namespace Blog.Data.Repository
         //    };
         //}
 
-        public async Task<IndexViewModel> GetAllPosts(int pageNumber, string category)
+        public async Task<IndexViewModel> GetAllItems(int pageNumber, string category)
         {
             int pageSize = 2;
             int skipAmount = pageSize * (pageNumber - 1);
 
-            var query = _ctx.Posts.AsQueryable();
+            var query = _ctx.Items.AsQueryable();
 
             if (!String.IsNullOrEmpty(category))
                 query = query.Where(x => x.Category.Equals(category));
 
-            int postCount = query.Count();
-            int pageCount = (int)Math.Ceiling((double)postCount / pageSize);
+            int itemCount = query.Count();
+            int pageCount = (int)Math.Ceiling((double)itemCount / pageSize);
 
             return new IndexViewModel()
             {
                 PageNumber = pageNumber,
                 PageCount = pageCount,
                 Category = category,
-                NextPage = postCount > skipAmount + pageSize,
+                NextPage = itemCount > skipAmount + pageSize,
                 Pages = PageHelper.PageNumbers(pageNumber, pageCount).ToList(), // not adding tolist will make the IEnumberable method calculate again
-                Posts = await query
+                Items = await query
                     .Skip(skipAmount)
                     .Take(pageSize)
                     .ToListAsync()
@@ -109,22 +109,22 @@ namespace Blog.Data.Repository
         //    // This works but is case insensitive
         //}
 
-        public Post GetPost(int id)
+        public Item GetItem(int id)
         {
-            return _ctx.Posts
+            return _ctx.Items
                 .Include(p => p.MainComments)
                 .ThenInclude(mc => mc.SubComments)
                 .FirstOrDefault(p => p.Id == id);
         }
 
-        public void RemovePost(int id)
+        public void RemoveItem(int id)
         {
-            _ctx.Posts.Remove(GetPost(id));
+            _ctx.Items.Remove(GetItem(id));
         }
 
-        public void UpdatePost(Post post)
+        public void UpdateItem(Item post)
         {
-            _ctx.Posts.Update(post);
+            _ctx.Items.Update(post);
         }
 
         public void AddSubComment(SubComment comment)

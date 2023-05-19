@@ -8,16 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Blog.Data;
+using FoodMarket.Data;
 using Microsoft.EntityFrameworkCore;
-using Blog.Data.Repository;
+using FoodMarket.Data.Repository;
 using Microsoft.AspNetCore.Identity;
-using Blog.Data.FileManager;
+using FoodMarket.Data.FileManager;
 using Microsoft.AspNetCore.Mvc;
 using Pomelo.EntityFrameworkCore.MySql.Storage;
 using Pomelo.EntityFrameworkCore.MySql.Internal;
 
-namespace Blog
+namespace FoodMarket
 {
     public class Startup
     {

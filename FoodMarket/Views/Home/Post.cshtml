@@ -1,9 +1,9 @@
-﻿@model Post
+﻿@model Item
 
 @{
     ViewBag.Title = Model.Title;
     ViewBag.Description = Model.Description;
-    ViewBag.Keywords = $"{Model.Tags?.Replace(',', ' ').Replace("  ", " ")} {Model.Category}";
+    //ViewBag.Keywords = $"{Model.Tags?.Replace(',', ' ').Replace("  ", " ")} {Model.Category}";
     var base_path = Context.Request.PathBase;
 }
 
@@ -29,7 +29,7 @@
         }
     </div>
     <div class="post-body">
-        @Html.Raw(Model.Body)
+        @*@Html.Raw(Model.Body)*@
     </div>
     
     @if (User.Identity.IsAuthenticated)

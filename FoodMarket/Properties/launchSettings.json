@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Blog": {
+    "FoodMarket": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

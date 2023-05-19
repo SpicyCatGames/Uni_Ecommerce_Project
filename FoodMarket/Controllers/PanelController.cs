@@ -1,7 +1,7 @@
-﻿using Blog.Data.FileManager;
-using Blog.Data.Repository;
-using Blog.Models;
-using Blog.ViewModels;
+﻿using FoodMarket.Data.FileManager;
+using FoodMarket.Data.Repository;
+using FoodMarket.Models;
+using FoodMarket.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blog.Controllers
+namespace FoodMarket.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class PanelController : Controller
@@ -26,73 +26,71 @@ namespace Blog.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _repo.GetAllPosts());
+            return View(await _repo.GetAllIItems());
         }
 
         [HttpGet]
         public IActionResult Edit(int? id)
         {
             if (id == null)
-                return View(new PostViewModel());
+                return View(new ItemViewModel());
             else
             {
-                var post = _repo.GetPost((int)id);
-                return View(new PostViewModel
+                var item = _repo.GetItem((int)id);
+                return View(new ItemViewModel
                 {
-                    Id = post.Id,
-                    Title = post.Title,
-                    Body = post.Body,
-                    CurrentImage = post.Image,
-                    Category = post.Category,
-                    Description = post.Description,
-                    Tags = post.Tags
+                    Id = item.Id,
+                    Title = item.Title,
+                    Price = item.Price,
+                    CurrentImage = item.Image,
+                    Category = item.Category,
+                    Description = item.Description
                 });
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(PostViewModel vm)
+        public async Task<IActionResult> Edit(ItemViewModel vm)
         {
-            Post post = new Post
+            Item item = new Item
             {
                 Id = vm.Id,
                 Title = vm.Title,
-                Body = vm.Body,
+                Price = vm.Price,
                 Category = vm.Category,
-                Description = vm.Description,
-                Tags = vm.Tags
+                Description = vm.Description
             };
 
             if (vm.Image == null)
-                post.Image = vm.CurrentImage;
+                item.Image = vm.CurrentImage;
             else
             {
                 if (!String.IsNullOrEmpty(vm.CurrentImage))
                 {
                     _fileManager.RemoveImage(vm.CurrentImage);
                 }
-                post.Image = await _fileManager.SaveImage(vm.Image);
+                item.Image = await _fileManager.SaveImage(vm.Image);
             }
                 
 
-            if (post.Id > 0)
-                _repo.UpdatePost(post);
+            if (item.Id > 0)
+                _repo.UpdateItem(item);
             else
                 // new post
-                _repo.AddPost(post);
+                _repo.AddItem(item);
 
             if (await _repo.SaveChangesAsync())
                 return RedirectToAction("Index");
             else
             {
-                return View(post);
+                return View(item);
             }
         }
 
         [HttpGet]
         public async Task<IActionResult> Remove(int id)
         {
-            _repo.RemovePost(id);
+            _repo.RemoveItem(id);
             await _repo.SaveChangesAsync();
             return RedirectToAction("Index");
         }

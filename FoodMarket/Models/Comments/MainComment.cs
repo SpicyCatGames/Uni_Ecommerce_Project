@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Blog.Models.Comments
+namespace FoodMarket.Models.Comments
 {
     public class MainComment : Comment
     {

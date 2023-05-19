@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blog.Data.FileManager
+namespace FoodMarket.Data.FileManager
 {
     public interface IFileManager
     {

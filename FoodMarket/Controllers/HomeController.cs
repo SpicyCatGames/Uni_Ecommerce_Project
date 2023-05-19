@@ -1,9 +1,9 @@
-﻿using Blog.Data;
-using Blog.Data.FileManager;
-using Blog.Data.Repository;
-using Blog.Models;
-using Blog.Models.Comments;
-using Blog.ViewModels;
+﻿using FoodMarket.Data;
+using FoodMarket.Data.FileManager;
+using FoodMarket.Data.Repository;
+using FoodMarket.Models;
+using FoodMarket.Models.Comments;
+using FoodMarket.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blog.Controllers
+namespace FoodMarket.Controllers
 {
     public class HomeController : Controller
     {
@@ -37,14 +37,14 @@ namespace Blog.Controllers
             //    await _repo.GetAllPosts(pageNumber)
             //    : await _repo.GetAllPosts(pageNumber, category);
 
-            var vm = await _repo.GetAllPosts(pageNumber, category);
+            var vm = await _repo.GetAllItems(pageNumber, category);
 
             return View(vm);
         }
 
         public IActionResult Post(int id)
         {
-            var post = _repo.GetPost(id);
+            var post = _repo.GetItem(id);
 
             return View(post);
         }
@@ -64,7 +64,7 @@ namespace Blog.Controllers
             if (!ModelState.IsValid)
                 return RedirectToAction("Post", new { id = vm.PostId});
 
-            var post = _repo.GetPost(vm.PostId);
+            var post = _repo.GetItem(vm.PostId);
             if(vm.MainCommentId == 0) // maincomment
             {
                 post.MainComments = post.MainComments ?? new List<Models.Comments.MainComment>();
@@ -73,7 +73,7 @@ namespace Blog.Controllers
                     Created = DateTime.Now,
                     Message = vm.Message
                 });
-                _repo.UpdatePost(post);
+                _repo.UpdateItem(post);
             }
             else // subcomment
             {

@@ -1,19 +1,19 @@
 ﻿@model IndexViewModel
 
 @{
-    ViewBag.Title = "Blog Website";
-    ViewBag.Description = "This Blog has everything!";
-    ViewBag.Keywords = "blog programming travel photography";
-    //ViewData.Add("Title", "Blog Website");
-    //ViewData.Add("Description", "This Blog has everything!");
-    //ViewData.Add("Keywords", "blog programming travel photography");
+    ViewBag.Title = "Food Market";
+    ViewBag.Description = "We sell stuff!";
+    ViewBag.Keywords = "food grain rice";
+    //ViewData.Add("Title", "Food Market");
+    //ViewData.Add("Description", "We sell stuff!");
+    //ViewData.Add("Keywords", "food grain rice");
     var base_path = Context.Request.PathBase;
 }
 @*<h2>Home Page!</h2>
 
 <img src="~/content/static/polina-rytova-1dGMs4hhcVA-unsplash.jpg" width="500"/>*@
 <div class="main-img">
-    <span class="title">Amazing Blog Site</span>
+    <span class="title">Food Market</span>
 </div>
 
 <div class="container">
@@ -28,9 +28,9 @@
            }
         </ul>*@
 
-    <partial name="_BlogPagination" model="Model"></partial>
+    <partial name="_Pagination" model="Model"></partial>
 
-    @foreach (var post in Model.Posts)
+    @foreach (var post in Model.Items)
     {
         var image_path = $"{base_path}/Image/{post.Image}";
         <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id" class="post">
@@ -41,6 +41,6 @@
         </a>
     }
 
-    <partial name="_BlogPagination" model="Model"></partial>
+    <partial name="_Pagination" model="Model"></partial>
 
 </div>
