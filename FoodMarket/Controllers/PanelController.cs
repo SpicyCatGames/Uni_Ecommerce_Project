@@ -58,7 +58,7 @@ namespace FoodMarket.Controllers
                 Id = vm.Id,
                 Title = vm.Title,
                 Price = vm.Price,
-                Stock = vm.Stock
+                Stock = vm.Stock,
                 Category = vm.Category,
                 Description = vm.Description
             };
