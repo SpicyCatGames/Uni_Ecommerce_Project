@@ -34,6 +34,11 @@
         <br />
         @Model.Stock items left!
     </div>
+    <div>
+        <a asp-controller="Home" asp-action="BuyItem" asp-route-id="@Model.Id">
+            <input type="button" class="btn btn-primary" value="Buy" />
+        </a>
+    </div>
     
     @if (User.Identity.IsAuthenticated)
     {
@@ -47,6 +52,7 @@
                 <p>
                     @c.Message --- @c.Created
                 </p>
+                
                 <div style="margin-left:20px;">
 
                     @{

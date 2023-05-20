@@ -49,6 +49,22 @@ namespace FoodMarket.Controllers
             return View(item);
         }
 
+        public async Task<IActionResult> BuyItem(int id)
+        {
+            var item = _repo.GetItem(id);
+            if(item == null || item.Stock <= 0)
+            {
+                return View("Item", item);
+            }
+            else
+            {
+                item.Stock = item.Stock - 1;
+                _repo.UpdateItem(item);
+                await _repo.SaveChangesAsync();
+                return View("Item", item);
+            }
+        }
+
         //[HttpGet("[controller]/Image/{image}")]
         [HttpGet("/Image/{image}")]
         [ResponseCache(Duration = 300)]
