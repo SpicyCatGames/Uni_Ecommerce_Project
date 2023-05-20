@@ -18,7 +18,7 @@
 <p>@Model.Body</p>*@
 
 <div class="container">
-    <div class="post no-shadow">
+    <div class="item no-shadow">
         <span class="title">
             @Model.Title
         </span>
@@ -28,7 +28,7 @@
             <img src="@image_path" width="500"/>
         }
     </div>
-    <div class="post-body">
+    <div class="item-body">
         @*@Html.Raw(Model.Body)*@
     </div>
     
@@ -36,7 +36,7 @@
     {
         <div class="comment-section">
             @{
-                await Html.RenderPartialAsync("_MainComment", new CommentViewModel() { PostId = Model.Id, MainCommentId = 0 });
+                await Html.RenderPartialAsync("_MainComment", new CommentViewModel() { ItemId = Model.Id, MainCommentId = 0 });
             }
             @foreach (var c in Model.MainComments)
             {
@@ -47,7 +47,7 @@
                 <div style="margin-left:20px;">
 
                     @{
-                        await Html.RenderPartialAsync("_MainComment", new CommentViewModel() { PostId = Model.Id, MainCommentId = c.Id });
+                        await Html.RenderPartialAsync("_MainComment", new CommentViewModel() { ItemId = Model.Id, MainCommentId = c.Id });
                     }
                     @if (c.SubComments != null && c.SubComments.Count > 0)
                     {

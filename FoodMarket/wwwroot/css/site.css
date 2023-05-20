@@ -48,7 +48,7 @@ nav {
     margin: auto;
 }
 
-.post {
+.item {
     margin: 5px;
     position: relative;
     display: flex;
@@ -56,12 +56,12 @@ nav {
     box-shadow: 0 0 5px 0 black;
 }
 
-    .post img {
+    .item img {
         width: 100%;
         object-fit: cover;
     }
 
-.post-body {
+.item-body {
     margin: -5px 5px 0;
     background-color: white;
     padding: 20px 5px;

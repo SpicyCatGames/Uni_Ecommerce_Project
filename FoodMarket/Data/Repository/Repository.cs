@@ -21,9 +21,9 @@ namespace FoodMarket.Data.Repository
             _ctx = ctx;
         }
 
-        public void AddItem(Item post)
+        public void AddItem(Item item)
         {
-            _ctx.Items.Add(post);
+            _ctx.Items.Add(item);
         }
 
         public async Task<List<Item>> GetAllIItems()
@@ -31,7 +31,7 @@ namespace FoodMarket.Data.Repository
             return await _ctx.Items.ToListAsync();
         }
 
-        //public async Task<IndexViewModel> GetAllPosts(int pageNumber)
+        //public async Task<IndexViewModel> GetAllItems(int pageNumber)
         //{
         //    int pageSize = 5;
         //    int skipAmount = pageSize * (pageNumber - 1);
@@ -39,8 +39,8 @@ namespace FoodMarket.Data.Repository
         //    return new IndexViewModel()
         //    {
         //        PageNumber = pageNumber,
-        //        NextPage = _ctx.Posts.Count() > skipAmount + pageSize,
-        //        Posts = await _ctx.Posts
+        //        NextPage = _ctx.Items.Count() > skipAmount + pageSize,
+        //        Items = await _ctx.Items
         //            .Skip(skipAmount)
         //            .Take(pageSize)
         //            .ToListAsync()
@@ -74,7 +74,7 @@ namespace FoodMarket.Data.Repository
             };
         }
 
-        //public async Task<IndexViewModel> GetAllPosts(int pageNumber, string category)
+        //public async Task<IndexViewModel> GetAllItems(int pageNumber, string category)
         //{
         //    int pageSize = 5;
         //    int skipAmount = pageSize * (pageNumber - 1);
@@ -83,8 +83,8 @@ namespace FoodMarket.Data.Repository
         //    {
         //        PageNumber = pageNumber,
         //        Category = category,
-        //        NextPage = _ctx.Posts.Where(p => p.Category.Equals(category)).Count() > skipAmount + pageSize,
-        //        Posts = await _ctx.Posts
+        //        NextPage = _ctx.Items.Where(p => p.Category.Equals(category)).Count() > skipAmount + pageSize,
+        //        Items = await _ctx.Items
         //            .Where(p => p.Category.Equals(category))
         //            .Skip(skipAmount)
         //            .Take(pageSize)
@@ -92,18 +92,18 @@ namespace FoodMarket.Data.Repository
         //    };
         //}
 
-        //public async Task<List<Post>> GetAllPosts(string category)
+        //public async Task<List<Item>> GetAllItems(string category)
         //{
-        //    return await _ctx.Posts
-        //        .Where(post => post.Category.Equals(category))
+        //    return await _ctx.Items
+        //        .Where(item => item.Category.Equals(category))
         //        .ToListAsync();
         //    // This words but is case insensitive
 
         //    // asenumerable or await linq.tolistasync or expression<func<>> for client side eval
         //    // TODO why does expression still give translation error and not allow client side eval
 
-        //    //Expression<Func<Post, bool>> InCategoryExpr = post => post.Category.Equals(category);
-        //    //return await _ctx.Posts
+        //    //Expression<Func<Item, bool>> InCategoryExpr = item => item.Category.Equals(category);
+        //    //return await _ctx.Items
         //    //    .Where(InCategoryExpr)
         //    //    .ToListAsync();
         //    // This works but is case insensitive
@@ -122,9 +122,9 @@ namespace FoodMarket.Data.Repository
             _ctx.Items.Remove(GetItem(id));
         }
 
-        public void UpdateItem(Item post)
+        public void UpdateItem(Item item)
         {
-            _ctx.Items.Update(post);
+            _ctx.Items.Update(item);
         }
 
         public void AddSubComment(SubComment comment)

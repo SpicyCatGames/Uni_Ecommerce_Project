@@ -14,10 +14,10 @@ namespace FoodMarket.Data.Repository
         Item GetItem(int id);
         Task<List<Item>> GetAllIItems();
         /// <param name="pageNumber">index starts at 1</param>
-        //Task<IndexViewModel> GetAllPosts(int pageNumber);
+        //Task<IndexViewModel> GetAllItems(int pageNumber);
         Task<IndexViewModel> GetAllItems(int pageNumber, string category);
-        void AddItem(Item post);
-        void UpdateItem(Item post);
+        void AddItem(Item item);
+        void UpdateItem(Item item);
         void RemoveItem(int id);
 
         void AddSubComment(SubComment subComment);

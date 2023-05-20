@@ -78,7 +78,7 @@ namespace FoodMarket.Controllers
             if (item.Id > 0)
                 _repo.UpdateItem(item);
             else
-                // new post
+                // new item
                 _repo.AddItem(item);
 
             if (await _repo.SaveChangesAsync())

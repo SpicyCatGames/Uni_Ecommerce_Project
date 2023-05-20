@@ -29,24 +29,24 @@ namespace FoodMarket.Controllers
             if (pageNumber < 1)
                 return RedirectToAction("Index", new {pageNumber = 1, category});
 
-            //var posts = String.IsNullOrEmpty(category) ? 
-            //    _repo.GetAllPosts(pageNumber) : 
-            //    _repo.GetAllPosts(category);
+            //var items = String.IsNullOrEmpty(category) ? 
+            //    _repo.GetAllItems(pageNumber) : 
+            //    _repo.GetAllItems(category);
 
             //var vm = (String.IsNullOrEmpty(category)) ?
-            //    await _repo.GetAllPosts(pageNumber)
-            //    : await _repo.GetAllPosts(pageNumber, category);
+            //    await _repo.GetAllItems(pageNumber)
+            //    : await _repo.GetAllItems(pageNumber, category);
 
             var vm = await _repo.GetAllItems(pageNumber, category);
 
             return View(vm);
         }
 
-        public IActionResult Post(int id)
+        public IActionResult Item(int id)
         {
-            var post = _repo.GetItem(id);
+            var item = _repo.GetItem(id);
 
-            return View(post);
+            return View(item);
         }
 
         //[HttpGet("[controller]/Image/{image}")]
@@ -62,18 +62,18 @@ namespace FoodMarket.Controllers
         public async Task<IActionResult> Comment(CommentViewModel vm)
         {
             if (!ModelState.IsValid)
-                return RedirectToAction("Post", new { id = vm.PostId});
+                return RedirectToAction("Item", new { id = vm.ItemId});
 
-            var post = _repo.GetItem(vm.PostId);
+            var item = _repo.GetItem(vm.ItemId);
             if(vm.MainCommentId == 0) // maincomment
             {
-                post.MainComments = post.MainComments ?? new List<Models.Comments.MainComment>();
-                post.MainComments.Add(new MainComment()
+                item.MainComments = item.MainComments ?? new List<Models.Comments.MainComment>();
+                item.MainComments.Add(new MainComment()
                 {
                     Created = DateTime.Now,
                     Message = vm.Message
                 });
-                _repo.UpdateItem(post);
+                _repo.UpdateItem(item);
             }
             else // subcomment
             {
@@ -86,7 +86,7 @@ namespace FoodMarket.Controllers
                 _repo.AddSubComment(comment);
             }
             await _repo.SaveChangesAsync();
-            return RedirectToAction("Post", new { id = vm.PostId });
+            return RedirectToAction("Item", new { id = vm.ItemId });
         }
     }
 }
