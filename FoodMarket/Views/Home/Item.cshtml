@@ -30,6 +30,9 @@
     </div>
     <div class="item-body">
         @*@Html.Raw(Model.Body)*@
+        Price: @Model.Price Taka
+        <br />
+        @Model.Stock items left!
     </div>
     
     @if (User.Identity.IsAuthenticated)
