@@ -22,9 +22,8 @@
         <div>
             <label>Category</label>
             <select asp-for="Category">
-                <option value="Travel">Travel</option>
-                <option value="Programming">Programming</option>
-                <option value="Photography">Photography</option>
+                <option value="Grains">Grains</option>
+                <option value="Others">Others</option>
             </select>
         </div>
 
@@ -36,6 +35,14 @@
             <label>Image</label>
             <input asp-for="CurrentImage" type="hidden" />
             <input asp-for="Image" />
+        </div>
+        <div>
+            <label>Price</label>
+            <input asp-for="Price" />
+        </div>
+        <div>
+            <label>Stock</label>
+            <input asp-for="Stock" />
         </div>
         <input type="submit" value="Submit" />
     </form>

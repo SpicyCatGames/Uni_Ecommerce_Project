@@ -23,9 +23,9 @@
 
             @if (User.Identity.IsAuthenticated)
             {
-                if (User.IsInRole("Admin"))
+                if (User.IsInRole("Seller") || User.IsInRole("Admin"))
                 {
-                    <a asp-controller="Panel" asp-action="Index">Admin Panel</a>
+                    <a asp-controller="Panel" asp-action="Index">Manage Items</a>
                 }
                 <a asp-controller="Auth" asp-action="Logout">Logout</a>
             }
