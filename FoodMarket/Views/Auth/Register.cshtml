@@ -2,7 +2,7 @@
 
 <form class="sign-in-form" asp-controller="Auth" asp-action="Register">
     <div>
-        <label for="Email">UserName</label>
+        <label for="Email">Email</label>
         <input asp-for=Email />
         <span asp-validation-for="Email"></span>
     </div>
@@ -15,6 +15,13 @@
         <label for="Password">Confirm Password</label>
         <input asp-for=ConfirmPassword />
         <span asp-validation-for="ConfirmPassword"></span>
+    </div>
+    <div>
+        <label for="Role">Register as:</label>
+        <select name="Role">
+            <option value="Buyer">Buyer</option>
+            <option value="Seller">Seller</option>
+        </select>
     </div>
     <div>
         <input type="submit" value="Sign Up" />

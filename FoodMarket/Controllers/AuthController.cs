@@ -11,15 +11,18 @@ namespace FoodMarket.Controllers
 {
     public class AuthController : Controller
     {
-        private SignInManager<IdentityUser> _signInManager;
-        private UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public AuthController(
             SignInManager<IdentityUser> signInManager, 
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         [HttpGet]
@@ -66,7 +69,7 @@ namespace FoodMarket.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel vm)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || vm.Role.Equals("Admin"))
             {
                 return View(vm);
             }
@@ -77,16 +80,25 @@ namespace FoodMarket.Controllers
                 Email = vm.Email
             };
 
-            var result = await _userManager.CreateAsync(user, vm.Password);
+            var role = _roleManager.Roles.FirstOrDefault(role => role.Name.Equals(vm.Role));
 
-            if (result.Succeeded)
+            if(role == null)
             {
-                await _signInManager.SignInAsync(user, false);
-
-                return RedirectToAction("Index", "Home");
+                return View(vm);
             }
 
-            return View(vm);
+            var result = await _userManager.CreateAsync(user, vm.Password);
+
+            if (!result.Succeeded)
+            {
+                return View(vm);
+            }
+
+            await _userManager.AddToRoleAsync(user, role.Name);
+
+            await _signInManager.SignInAsync(user, false);
+
+            return RedirectToAction("Index", "Home");
         }
 
 
