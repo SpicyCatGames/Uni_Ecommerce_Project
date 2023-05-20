@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace FoodMarket.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Seller")]
     public class PanelController : Controller
     {
         private IRepository _repo;
