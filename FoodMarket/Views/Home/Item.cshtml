@@ -34,10 +34,12 @@
         <br />
         @Model.Stock items left!
     </div>
-    <div>
-        <a asp-controller="Home" asp-action="BuyItem" asp-route-id="@Model.Id">
-            <input type="button" class="btn btn-primary" value="Buy" />
-        </a>
+    <div>@if (User.IsInRole("Buyer") && Model.Stock > 0)
+        {
+            <a asp-controller="Home" asp-action="BuyItem" asp-route-id="@Model.Id">
+                <input type="button" class="btn btn-primary" value="Buy" />
+            </a>
+        }
     </div>
     
     @if (User.Identity.IsAuthenticated)
